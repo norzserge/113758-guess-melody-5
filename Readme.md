@@ -1,7 +1,7 @@
 # Учебный проект «Угадай мелодию» [![Build status][travis-image]][travis-url]
 
-* Студент: [Сергей Метельский](https://up.htmlacademy.ru/react/5/user/113758).
-* Наставник: `Неизвестно`.
+- Студент: [Сергей Метельский](https://up.htmlacademy.ru/react/5/user/113758).
+- Наставник: `Иван Шалагин`.
 
 ---
 
