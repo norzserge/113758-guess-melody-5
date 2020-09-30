@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const WelcomeScreen = (props) => {
   const {errorsCount} = props;
-  return (<h1>{errorsCount}</h1>);
+  return <h1>{errorsCount}</h1>;
 };
 
 WelcomeScreen.propTypes = {
