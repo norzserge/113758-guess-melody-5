@@ -1,6 +1,6 @@
 import React from "react";
 
-const Lose = () => {
+const LoseScreen = () => {
   return (
     <section className="result">
       <div className="result__logo">
@@ -22,4 +22,4 @@ const Lose = () => {
   );
 };
 
-export default Lose;
+export default LoseScreen;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Login = () => {
+const LoginScreen = () => {
   return (
     <section className="login">
       <div className="login__logo">
@@ -43,4 +43,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginScreen;

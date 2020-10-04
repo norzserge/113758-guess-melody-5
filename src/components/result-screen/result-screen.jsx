@@ -1,6 +1,6 @@
 import React from "react";
 
-const Result = () => {
+const ResultScreen = () => {
   return (
     <section className="result">
       <div className="result__logo">
@@ -20,4 +20,4 @@ const Result = () => {
   );
 };
 
-export default Result;
+export default ResultScreen;
