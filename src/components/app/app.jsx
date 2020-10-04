@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import WelcomeScreen from "../welcome-screen/welcome-screen";
-import SignInScreen from "../login/login";
-import GameOverScreen from "../lose/lose";
-import ResultScreen from "../result/result";
-import ArtistScreen from "../artist/artist";
-import GenreScreen from "../genre/genre";
+import SignInScreen from "../login-screen/login-screen";
+import GameOverScreen from "../lose-screen/lose-screen";
+import ResultScreen from "../result-screen/result-screen";
+import ArtistScreen from "../artist-screen/artist-screen";
+import GenreScreen from "../genre-screen/genre-screen";
 
 const App = (props) => {
   const {errorsCount} = props;
