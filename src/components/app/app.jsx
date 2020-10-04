@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 import WelcomeScreen from "../welcome-screen/welcome-screen";
-import SignIn from "../login/login";
-import GameOver from "../lose/lose";
-import Result from "../result/result";
-import Artist from "../artist/artist";
-import Genre from "../genre/genre";
+import SignInScreen from "../login/login";
+import GameOverScreen from "../lose/lose";
+import ResultScreen from "../result/result";
+import ArtistScreen from "../artist/artist";
+import GenreScreen from "../genre/genre";
 
 const App = (props) => {
   const {errorsCount} = props;
@@ -17,19 +17,19 @@ const App = (props) => {
           <WelcomeScreen errorsCount={errorsCount} />
         </Route>
         <Route exact path="/login">
-          <SignIn />
+          <SignInScreen />
         </Route>
         <Route exact path="/result">
-          <Result />
+          <ResultScreen />
         </Route>
         <Route exact path="/lose">
-          <GameOver />
+          <GameOverScreen />
         </Route>
         <Route exact path="/dev-artist">
-          <Artist />
+          <ArtistScreen />
         </Route>
         <Route exact path="/dev-genre">
-          <Genre />
+          <GenreScreen />
         </Route>
       </Switch>
     </BrowserRouter>
