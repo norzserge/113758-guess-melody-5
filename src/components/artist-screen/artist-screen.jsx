@@ -1,6 +1,10 @@
 import React from "react";
+import {artistScreenType} from './artistScreenType';
 
-const ArtistScreen = () => {
+const ArtistScreen = (props) => {
+  const {onAnswer, question} = props;
+  const {answers, song} = question;
+
   return (
     <section className="game game--artist">
       <header className="game__header">
@@ -40,66 +44,44 @@ const ArtistScreen = () => {
               type="button"
             ></button>
             <div className="track__status">
-              <audio></audio>
+              <audio src={song.src} />
             </div>
           </div>
         </div>
         <form className="game__artist">
-          <div className="artist">
-            <input
-              className="artist__input visually-hidden"
-              type="radio"
-              name="answer"
-              value="artist-1"
-              id="answer-1"
-            />
-            <label className="artist__name" htmlFor="answer-1">
-              <img
-                className="artist__picture"
-                src="img/placeholder.jpg"
-                alt="Пелагея"
-              />
-              Пелагея
-            </label>
-          </div>
-          <div className="artist">
-            <input
-              className="artist__input visually-hidden"
-              type="radio"
-              name="answer"
-              value="artist-2"
-              id="answer-2"
-            />
-            <label className="artist__name" htmlFor="answer-2">
-              <img
-                className="artist__picture"
-                src="img/placeholder.jpg"
-                alt="Пелагея"
-              />
-              Краснознаменная дивизия имени моей бабушки
-            </label>
-          </div>
-          <div className="artist">
-            <input
-              className="artist__input visually-hidden"
-              type="radio"
-              name="answer"
-              value="artist-3"
-              id="answer-3"
-            />
-            <label className="artist__name" htmlFor="answer-3">
-              <img
-                className="artist__picture"
-                src="img/placeholder.jpg"
-                alt="Пелагея"
-              />
-              Lorde
-            </label>
-          </div>
+          {
+            answers.map((answer, index) => {
+              return (
+                <div key={answer.artist} className="artist">
+                  <input
+                    className="artist__input visually-hidden"
+                    type="radio"
+                    name="answer"
+                    value={`answer-${index}`}
+                    id={`answer-${index}`}
+                    onChange={(evt) => {
+                      evt.preventDefault();
+                      onAnswer(question, answer);
+                    }}
+                  />
+                  <label className="artist__name" htmlFor={`answer-${index}`}>
+                    <img
+                      className="artist__picture"
+                      src={answer.picture}
+                      alt={answer.artist}
+                    />
+                    {answer.artist}
+                  </label>
+                </div>
+              );
+            })
+          }
         </form>
       </section>
     </section>
   );
 };
+
+ArtistScreen.propTypes = artistScreenType;
 
 export default ArtistScreen;
