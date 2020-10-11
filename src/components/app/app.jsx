@@ -1,43 +1,63 @@
-import React from "react";
-import PropTypes from "prop-types";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-import WelcomeScreen from "../welcome-screen/welcome-screen";
-import SignInScreen from "../login-screen/login-screen";
-import GameOverScreen from "../lose-screen/lose-screen";
-import ResultScreen from "../result-screen/result-screen";
-import ArtistScreen from "../artist-screen/artist-screen";
-import GenreScreen from "../genre-screen/genre-screen";
+import React from 'react';
+import {appType} from './appType';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import WelcomeScreen from '../welcome-screen/welcome-screen';
+import SignInScreen from '../login-screen/login-screen';
+import GameOverScreen from '../lose-screen/lose-screen';
+import ResultScreen from '../result-screen/result-screen';
+import ArtistScreen from '../artist-screen/artist-screen';
+import GenreScreen from '../genre-screen/genre-screen';
+import GameScreen from '../game-screen/game-screen';
 
 const App = (props) => {
-  const {errorsCount} = props;
+  const {errorsCount, questions} = props;
+  const [firstQuestion, secondQuestion] = questions;
+
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
-          <WelcomeScreen errorsCount={errorsCount} />
+        <Route
+          exact
+          path='/'
+          render={({history}) => (
+            <WelcomeScreen
+              errorsCount={errorsCount}
+              onPlayButtonClick={() => history.push(`/game`)}
+            />
+          )}
+        />
+        <Route exact path='/dev-artist'>
+          <ArtistScreen
+            question={secondQuestion}
+            onAnswer={() => {}}
+          />
         </Route>
-        <Route exact path="/login">
+        <Route exact path='/dev-genre'>
+          <GenreScreen
+            question={firstQuestion}
+            onAnswer={() => {}}
+          />
+        </Route>
+        <Route exact path='/game'>
+          <GameScreen
+            questions={questions}
+            errorsCount={errorsCount}
+          />
+        </Route>
+        <Route exact path='/login'>
           <SignInScreen />
         </Route>
-        <Route exact path="/result">
+        <Route exact path='/result'>
           <ResultScreen />
         </Route>
-        <Route exact path="/lose">
+        <Route exact path='/lose'>
           <GameOverScreen />
-        </Route>
-        <Route exact path="/dev-artist">
-          <ArtistScreen />
-        </Route>
-        <Route exact path="/dev-genre">
-          <GenreScreen />
         </Route>
       </Switch>
     </BrowserRouter>
   );
 };
 
-App.propTypes = {
-  errorsCount: PropTypes.number.isRequired,
-};
+App.propTypes = appType;
 
 export default App;
