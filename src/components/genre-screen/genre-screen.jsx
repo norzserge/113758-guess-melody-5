@@ -9,7 +9,7 @@ class GenreScreen extends PureComponent {
     };
   }
   render() {
-    const {onAnswer, question} = this.props;
+    const {onAnswer, question, renderPlayer} = this.props;
     const {answers: userAnswers} = this.state;
     const {
       answers,
@@ -58,8 +58,7 @@ class GenreScreen extends PureComponent {
             {
               answers.map((answer, i) => (
                 <div key={`${i}-${answer.src}`} className="track">
-                  <button className="track__button track__button--play" type="button" />
-                  <div className="track__status"><audio src={answer.src} /></div>
+                  {renderPlayer(answer.src, i)}
                   <div className="game__answer">
                     <input
                       className="game__input visually-hidden"
@@ -67,7 +66,7 @@ class GenreScreen extends PureComponent {
                       name="answer"
                       value={`answer-${i}`}
                       id={`answer-${i}`}
-                      сhecked={userAnswers[i]}
+                      сhecked={userAnswers[i].toString()}
                       onChange={(evt) => {
                         const value = evt.target.checked;
                         this.setState({

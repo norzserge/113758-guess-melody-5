@@ -4,6 +4,10 @@ import {GameType} from '../../const';
 import ArtistScreen from '../artist-screen/artist-screen';
 import GenreScreen from '../genre-screen/genre-screen';
 import {gameScreenType} from './gameScreenType';
+import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+
+const GenreScreenHOC = withActivePlayer(GenreScreen);
+const ArtistScreenHOC = withActivePlayer(ArtistScreen);
 
 class GameScreen extends PureComponent {
   constructor(props) {
@@ -28,22 +32,22 @@ class GameScreen extends PureComponent {
     switch (question.type) {
       case GameType.ARTIST:
         return (
-          <ArtistScreen
+          <ArtistScreenHOC
             question={question}
             onAnswer={() => {
               this.setState((prevState) => ({
-                step: prevState + 1,
+                step: prevState.step + 1,
               }));
             }}
           />
         );
       case GameType.GENRE:
         return (
-          <GenreScreen
+          <GenreScreenHOC
             question={question}
             onAnswer={() => {
               this.setState((prevState) => ({
-                step: prevState + 1,
+                step: prevState.step + 1,
               }));
             }}
           />
