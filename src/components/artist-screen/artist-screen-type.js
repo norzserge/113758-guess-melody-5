@@ -13,5 +13,7 @@ export const artistScreenType = {
       src: PropTypes.string.isRequired,
     }).isRequired,
     type: PropTypes.oneOf([GameType.ARTIST, GameType.GENRE]).isRequired,
-  })
+  }).isRequired,
+  renderPlayer: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
 };

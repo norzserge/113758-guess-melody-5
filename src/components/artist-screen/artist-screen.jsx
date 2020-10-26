@@ -1,8 +1,8 @@
 import React from "react";
-import {artistScreenType} from './artistScreenType';
+import {artistScreenType} from './artist-screen-type';
 
 const ArtistScreen = (props) => {
-  const {onAnswer, question, renderPlayer} = props;
+  const {onAnswer, question, renderPlayer, children} = props;
   const {answers, song} = question;
 
   return (
@@ -29,11 +29,7 @@ const ArtistScreen = (props) => {
             style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1); transform-origin: center`}}
           />
         </svg>
-        <div className="game__mistakes">
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-          <div className="wrong"></div>
-        </div>
+        {children}
       </header>
       <section className="game__screen">
         <h2 className="game__title">Кто исполняет эту песню?</h2>
