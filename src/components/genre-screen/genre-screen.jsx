@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {genreScreenType} from './genreScreenType';
+import {genreScreenType} from './genre-screen-type';
 
 class GenreScreen extends PureComponent {
   constructor(props) {
@@ -9,7 +9,7 @@ class GenreScreen extends PureComponent {
     };
   }
   render() {
-    const {onAnswer, question, renderPlayer} = this.props;
+    const {onAnswer, question, renderPlayer, children} = this.props;
     const {answers: userAnswers} = this.state;
     const {
       answers,
@@ -40,11 +40,7 @@ class GenreScreen extends PureComponent {
               style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1); transform-origin: center`}}
             />
           </svg>
-          <div className="game__mistakes">
-            <div className="wrong"></div>
-            <div className="wrong"></div>
-            <div className="wrong"></div>
-          </div>
+          {children}
         </header>
         <section className="game__screen">
           <h2 className="game__title">Выберите {genre} треки</h2>

@@ -11,4 +11,6 @@ export const genreScreenType = {
       genre: PropTypes.string,
     })).isRequired,
   }).isRequired,
+  renderPlayer: PropTypes.func.isRequired,
+  children: PropTypes.element.isRequired,
 };

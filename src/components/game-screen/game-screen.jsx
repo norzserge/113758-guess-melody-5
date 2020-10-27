@@ -1,62 +1,70 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../store/action';
 import {GameType} from '../../const';
 import ArtistScreen from '../artist-screen/artist-screen';
 import GenreScreen from '../genre-screen/genre-screen';
-import {gameScreenType} from './gameScreenType';
+import {gameScreenType} from './game-screen-type';
 import withActivePlayer from '../../hocs/with-active-player/with-active-player';
+import Mistakes from '../mistakes/mistakes';
 
 const GenreScreenHOC = withActivePlayer(GenreScreen);
 const ArtistScreenHOC = withActivePlayer(ArtistScreen);
 
-class GameScreen extends PureComponent {
-  constructor(props) {
-    super(props);
+const GameScreen = (props) => {
+  const {questions, step, onUserAnswer, resetGame, mistakes} = props;
+  const question = questions[step];
 
-    this.state = {
-      step: 0,
-    };
+  if (step >= questions.length || !question) {
+    resetGame();
+
+    return (
+      <Redirect to="/" />
+    );
   }
 
-  render() {
-    const {questions} = this.props;
-    const {step} = this.state;
-    const question = questions[step];
-
-    if (step >= questions.length || !question) {
+  switch (question.type) {
+    case GameType.ARTIST:
       return (
-        <Redirect to="/" />
+        <ArtistScreenHOC
+          question={question}
+          onAnswer={onUserAnswer}
+        >
+          <Mistakes count={mistakes} />
+        </ArtistScreenHOC>
       );
-    }
-
-    switch (question.type) {
-      case GameType.ARTIST:
-        return (
-          <ArtistScreenHOC
-            question={question}
-            onAnswer={() => {
-              this.setState((prevState) => ({
-                step: prevState.step + 1,
-              }));
-            }}
-          />
-        );
-      case GameType.GENRE:
-        return (
-          <GenreScreenHOC
-            question={question}
-            onAnswer={() => {
-              this.setState((prevState) => ({
-                step: prevState.step + 1,
-              }));
-            }}
-          />
-        );
-    }
-    return <Redirect to="/" />;
+    case GameType.GENRE:
+      return (
+        <GenreScreenHOC
+          question={question}
+          onAnswer={onUserAnswer}
+        >
+          <Mistakes count={mistakes} />
+        </GenreScreenHOC>
+      );
   }
-}
+  return <Redirect to="/" />;
+};
 
 GameScreen.propTypes = gameScreenType;
 
-export default GameScreen;
+const mapStateToProps = (state) => ({
+  step: state.step,
+  mistakes: state.mistakes,
+  questions: state.questions,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  resetGame() {
+    dispatch(ActionCreator.resetGame());
+  },
+  onUserAnswer(question, answer) {
+    dispatch(ActionCreator.incrementStep());
+    dispatch(ActionCreator.incrementMistake(question, answer));
+  },
+});
+
+export {GameScreen};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GameScreen);
